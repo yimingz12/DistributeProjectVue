@@ -7,7 +7,7 @@
          <router-link to ="/GameNumBarChartView" tag="p"><v-btn text class = "title" style ="color:red">Game Number</v-btn></router-link>
           <router-link to ="/TotalTimeBarChartView" tag="p"><v-btn text class = "title" style ="color:red">Total played time</v-btn></router-link>
       </v-row>
- <v-card >
+ <v-card v-if="dataLoading">
    <TotalTimeBarChart :Ararat = Ararat :Barinsdale = Barinsdale :Ballarat= Ballarat 
 :Benalla= Benalla
 :Bendigo= Bendigo
@@ -57,6 +57,7 @@
 
        data: function() {
       return {
+        dataLoading:false,
           Ararat:0, 
           Barinsdale:0, 
           Ballarat:0, 
@@ -141,6 +142,7 @@
         this.Warrnambool = this.info.Warrnambool.total_time
          this.Wodonga = this.info.Wodonga.total_time
           this.Wonthaggi = this.info.Wonthaggi.total_time
+          this.dataLoading = true
   
     });
     

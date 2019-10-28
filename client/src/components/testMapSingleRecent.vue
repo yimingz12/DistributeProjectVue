@@ -2,9 +2,9 @@
 <template>
     <div>
   
-    <div class="display-3" style ="color:green">Total Player Analysis</div>
+    <div class="display-3" style ="color:green">Single Recent Time Analysis</div>
     <v-row>
-     <v-col>
+      <v-col>
       <router-link to ="/testMap" tag="p"><v-btn text class = "title" style ="color:red">Australian User</v-btn></router-link>
        <router-link to ="/testMapRecentTime" tag="p"><v-btn text class = "title" style ="color:red">Recent time</v-btn></router-link>
         <router-link to ="/testMapReviewNum" tag="p"><v-btn text class = "title" style ="color:red">Review number</v-btn></router-link>
@@ -47,14 +47,14 @@ export default {
     }).then(response => {this.info = response.data
     var i;
    //response.data.data.rows
-    this.ACTUser = this.info.ACT.game_num
-    this.NSWUser = this.info.NSW.game_num
-    this.NTUser = this.info.NT.game_num
-    this.QLDUser = this.info.QLD.game_num
-    this.SAUser = this.info.SA.game_num
-    this.TASUser = this.info.TAS.game_num
-    this.VICUser = this.info.VIC.game_num
-    this.WAUser = this.info.WA.game_num
+    this.ACTUser = this.info.ACT.single_recent_time
+    this.NSWUser = this.info.NSW.single_recent_time
+    this.NTUser = this.info.NT.single_recent_time
+    this.QLDUser = this.info.QLD.single_recent_time
+    this.SAUser = this.info.SA.single_recent_time
+    this.TASUser = this.info.TAS.single_recent_time
+    this.VICUser = this.info.VIC.single_recent_time
+    this.WAUser = this.info.WA.single_recent_time
     let map = am4core.create(this.$refs.chartdiv, am4maps.MapChart);
     map.geodata = am4geodata_australiaLow;
     map.projection = new am4maps.projections.Miller()
@@ -112,5 +112,15 @@ polygonSeries.data = [
 .hello {
   width: 900px;
   height: 600px;
+}
+.map-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.8);
+  margin-right: 20px;
+  font-family: Arial, sans-serif;
+  overflow: auto;
+  border-radius: 3px;
 }
 </style>

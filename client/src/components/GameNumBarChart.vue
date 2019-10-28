@@ -1,7 +1,5 @@
  <template>
  <v-card >
-     <div>{{Ballarat}}</div>
-     <div>{{Ballarat}}</div>
  <div id="chart">
       <apexchart type=bar height=1200 :options="chartOptions" :series="series" />
     </div>

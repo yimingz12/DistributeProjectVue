@@ -6,7 +6,7 @@
         <router-link to ="/compareTotalTimeView" tag="p"><v-btn text class = "title" style ="color:red">Total Time</v-btn></router-link>
          
       </v-row>
- <v-card >
+ <v-card  v-if="dataLoading">
    <compareTotalTime 
         :Ararat= Ararat
         :Ballarat = Ballarat
@@ -49,6 +49,7 @@
 
        data: function() {
       return {
+        dataLoading: false,
         Ararat:"",
         Ballarat:"",
         Benalla:"",
@@ -115,6 +116,7 @@
         this.WangarattaSleep = this.info.Wangaratta.sleep
         this.WarrnamboolSleep = this.info.Warrnambool.sleep
         this.WodongaSleep = this.info.Wodonga.sleep
+        this.dataLoading = true
 });
   },
 

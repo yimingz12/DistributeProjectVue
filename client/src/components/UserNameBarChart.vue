@@ -1,6 +1,5 @@
  <template>
  <v-card >
-     <div>showit</div>
  <div id="chart">
       <apexchart type=bar height=1200 :options="chartOptions" :series="series" />
     </div>

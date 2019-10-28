@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 
-//组件模块
+//Components
 import home from './components/home';
 import gameDetail from './components/gameDetail';
 import mapChart from './components/compareRecentTimeView';
@@ -17,6 +17,10 @@ import RecentTimeBarChartView from './components/RecentTimeBarChartView';
 import ReviewNumChartView from './components/ReviewNumBarChartView';
 import TotalTimeBarChartView from './components/TotalTimeBarChartView';
 import compareTotalTimeView from './components/compareTotalTimeView';
+import testMapSingle from './components/testMapSingle';
+import testMapMulti from './components/testMapMulti';
+import testMapSingleRecent from './components/testMapSingleRecent';
+import testMapMultiRecent from './components/testMapMultiRecent';
 
 Vue.use(Router)
  
@@ -36,5 +40,9 @@ export default new Router({
     { path: '/ReviewNumChartView', name: 'ReviewNumChartView', component: ReviewNumChartView },
     { path: '/TotalTimeBarChartView', name: 'TotalTimeBarChartView', component: TotalTimeBarChartView },
     { path: '/compareTotalTimeView', name: 'compareTotalTimeView', component: compareTotalTimeView },
+    { path: '/testMapSingle', name: 'testMapSingle', component: testMapSingle },
+    { path: '/testMapMulti', name: 'testMapMulti', component: testMapMulti },
+    { path: '/testMapSingleRecent', name: 'testMapSingleRecent', component: testMapSingleRecent },
+    { path: '/testMapMultiRecent', name: 'testMapMultiRecent', component: testMapMultiRecent },
   ]
 })

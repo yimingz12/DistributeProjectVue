@@ -9,7 +9,10 @@
        <router-link to ="/testMapRecentTime" tag="p"><v-btn text class = "title" style ="color:red">Recent time</v-btn></router-link>
         <router-link to ="/testMapReviewNum" tag="p"><v-btn text class = "title" style ="color:red">Review number</v-btn></router-link>
          <router-link to ="/testMapTotalTime" tag="p"><v-btn text class = "title" style ="color:red">Total played time</v-btn></router-link>
-          <router-link to ="/testMapGameNum" tag="p"><v-btn text class = "title" style ="color:red">Game Number</v-btn></router-link>
+          <router-link to ="/testMapSingle" tag="p"><v-btn text class = "title" style ="color:red">Single total time</v-btn></router-link>
+           <router-link to ="/testMapMulti" tag="p"><v-btn text class = "title" style ="color:red">multiple total time</v-btn></router-link>
+           <router-link to ="/testMapSingleRecent" tag="p"><v-btn text class = "title" style ="color:red">Single Recent time</v-btn></router-link>
+           <router-link to ="/testMapMultiRecent" tag="p"><v-btn text class = "title" style ="color:red">multiple Recent time</v-btn></router-link>
       </v-col>
      <div class="hello" ref="chartdiv"> </div>
     </v-row>

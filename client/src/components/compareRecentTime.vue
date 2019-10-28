@@ -1,6 +1,4 @@
 <template><div>
-    <div>{{Ararat}}</div>
-     <div>{{Ararat}}</div>
     <div id="chart">
       <apexchart type=area height=350 :options="chartOptions" :series="series" />
     </div>
