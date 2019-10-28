@@ -1,8 +1,8 @@
 # DistributeProjectVue
 
-  1.run the code:
-  npm install 
-  on server folder
+  1.run the code:  
+  npm install   
+  on server folder  
   2.run the code:
   npm install 
   on client folder
