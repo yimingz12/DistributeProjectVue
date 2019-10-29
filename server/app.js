@@ -68,12 +68,15 @@ app.get('/gameDetail',function(req,res){
 
 
 const dbname3 = 'au_user';
+const dbname4 = 'multi_game_user';
+const dbname5 = 'single_game_user';
 const terms = ["game_num","recent_time","review_num","total_time","user_num"];
 const terms1 = ["recent_time","total_time"];
 const viewUrlA = "_design/au_user/_view/";
+const viewUrlAm = "_design/multi_game_user/_view/";
+const viewUrlAs = "_design/single_game_user/_view/";
 const viewUrlB = "?group_level=1";
 const viewUrlC = "?group_level=2";
-
 
 
 
@@ -87,7 +90,8 @@ app.get('/gameDistribute',function(req,res){
     dict["TAS"] = {};
     dict["VIC"] = {};
     dict["WA"] = {};
-    terms.some(function (name){
+    function out(dict){
+        terms.some(function (name){
             var url = viewUrlA+name+viewUrlB;
             couch.get(dbname3,url).then(
                 function(data,headers,status){
@@ -96,7 +100,7 @@ app.get('/gameDistribute',function(req,res){
                         var tmp = data1[k];
                         dict[tmp["key"]][name] = tmp["value"];
                     };
-                    if(Object.keys(dict["WA"]).length==5){
+                    if(Object.keys(dict["WA"]).length==9){
                         for (var key in dict) {
                             if(Object.keys(dict[key]).length==0){
                                 delete dict[key];
@@ -118,8 +122,115 @@ app.get('/gameDistribute',function(req,res){
             )
             
     })
+    }
+    function sin(dict,callback){
+        terms1.some(function (name){
+            var url = viewUrlAs+name+viewUrlB;
+            couch.get(dbname5,url).then(
+                function(data,headers,status){
+                    var data1 = data.data.rows;
+                    for (var k in data1){
+                        var tmp = data1[k];
+                        dict[tmp["key"]]['single_'+name] = tmp["value"];
+                    };
+                    if(Object.keys(dict["WA"]).length==4){
+                        for (var key in dict) {
+                            if(Object.keys(dict[key]).length==0){
+                                delete dict[key];
+                            };
+                        };
+                        callback(dict);
+                        return true;
+
+                        
+                    };
+                },
+                function(err){
+                    console.log('error2');
+                }
+                
+            )
+            
+    })
+    }
+    terms1.some(function (name){
+            var url = viewUrlAm+name+viewUrlB;
+            couch.get(dbname4,url).then(
+                function(data,headers,status){
+                    var data1 = data.data.rows;
+                    for (var k in data1){
+                        var tmp = data1[k];
+                        dict[tmp["key"]]['multiple_'+name] = tmp["value"];
+                    };
+                    if(Object.keys(dict["WA"]).length==2){
+                        for (var key in dict) {
+                            if(Object.keys(dict[key]).length==0){
+                                delete dict[key];
+                            };
+                        };
+                        sin(dict,out)
+                        return true;
+
+                        
+                    };
+                },
+                function(err){
+                    console.log('error1');
+                }
+                
+            )
+            
+    })
     
 });
+
+
+
+
+app.get('/mulDistribute',function(req,res){
+    var dict = {};
+    dict["ACT"] = {};
+    dict["NSW"] = {};
+    dict["NT"] = {};
+    dict["QLD"] = {};
+    dict["SA"] = {};
+    dict["TAS"] = {};
+    dict["VIC"] = {};
+    dict["WA"] = {};
+    terms.some(function (name){
+            var url = viewUrlAm+name+viewUrlB;
+            couch.get(dbname4,url).then(
+                function(data,headers,status){
+                    var data1 = data.data.rows;
+                    for (var k in data1){
+                        var tmp = data1[k];
+                        dict[tmp["key"]][name] = tmp["value"];
+                    };
+                    if(Object.keys(dict["WA"]).length==5){
+                        for (var key in dict) {
+                            if(Object.keys(dict[key]).length==0){
+                                delete dict[key];
+                            };
+                        };
+                        res.render('mulDistribute',{
+                            
+                            mulDistribute:JSON.stringify(dict)
+                        });
+                        return true;
+
+                        
+                    };
+                },
+                function(err){
+                    res.send(err);
+                }
+                
+            )
+            
+    })
+    
+});
+
 
 
 
@@ -326,6 +437,9 @@ app.get('/sleepDistribute',function(req,res){
 
     dict2["Wodonga"] = {};
     dict2["Wonthaggi"] = {};
+    var s=0;
+    var t=0;
+    var r=0;
     terms1.some(function (name){
             var url = viewUrlA+name+viewUrlC;
             couch.get(dbname3,url).then(
@@ -337,21 +451,31 @@ app.get('/sleepDistribute',function(req,res){
                         
                         if(tmp["key"][0]=="VIC"&&vicMap[tmp["key"][1]] in c){
                             if(name=='total_time'){
-                                dict2[vicMap[tmp["key"][1]]][name] = tmp["value"]/200;
-                            }
-                            else{
+                                t = t+ tmp['value'];
+                                s = s + c[vicMap[tmp["key"][1]]];
+                                dict2[vicMap[tmp["key"][1]]][name] = tmp["value"];
+                                dict2[vicMap[tmp["key"][1]]]["sleep"] = c[vicMap[tmp["key"][1]]];
+                            };
+                            if(name=='recent_time'){
+                                r = r+ tmp['value'];
                                 dict2[vicMap[tmp["key"][1]]][name] = tmp["value"];
                             };
                             
-                            dict2[vicMap[tmp["key"][1]]]["sleep"] = c[vicMap[tmp["key"][1]]];
+                            
                             
 
                         }
                     };
                     if(Object.keys(dict2["Melbourne"]).length==3){
+                        var rate1 = t/s;
+                        var rate2 = r/s;
                         for (var key in dict2) {
                             if(Object.keys(dict2[key]).length==0){
                                 delete dict2[key];
+                            }
+                            else{
+                                dict2[key]['total_time']=(dict2[key]['total_time']/rate1).toFixed(2);
+                                dict2[key]['recent_time']=(dict2[key]['recent_time']/rate2).toFixed(2);
                             };
                             
                         };
@@ -371,6 +495,13 @@ app.get('/sleepDistribute',function(req,res){
     })
 
 });
+
+
+
+
+
+
+
 
 
 

@@ -1,11 +1,7 @@
  <template>
  <div>
- <div class="display-3" style ="color:green">Compare Total Time Analysis</div>
-    <v-row>
-       <router-link to ="/mapChart" tag="p"><v-btn text class = "title" style ="color:red">Recent time</v-btn></router-link>
-        <router-link to ="/compareTotalTimeView" tag="p"><v-btn text class = "title" style ="color:red">Total Time</v-btn></router-link>
-         
-      </v-row>
+ <div class="display-3" style ="color:green">Sleeping hours comparison Analysis</div>
+
  <v-card  v-if="dataLoading">
    <compareTotalTime 
         :Ararat= Ararat
@@ -22,6 +18,20 @@
         :Wangaratta = Wangaratta
         :Warrnambool = Warrnambool
         :Wodonga = Wodonga
+        :AraratTotal= AraratTotal
+        :BallaratTotal = BallaratTotal
+        :BenallaTotal = BenallaTotal 
+        :BendigoTotal = BendigoTotal
+        :ColacTotal = ColacTotal
+        :GeelongTotal = GeelongTotal
+        :HorshamTotal = HorshamTotal
+        :LaraTotal = LaraTotal
+        :MelbourneTotal = MelbourneTotal
+        :MeltonTotal = MelbourneTotal
+        :MilduraTotal = MilduraTotal
+        :WangarattaTotal = WangarattaTotal
+        :WarrnamboolTotal = WarrnamboolTotal
+        :WodongaTotal = WodongaTotal
         :AraratSleep = AraratSleep
         :BallaratSleep = BallaratSleep
         :BenallaSleep = BenallaSleep
@@ -64,6 +74,20 @@
         Wangaratta:"",
         Warrnambool:"",
         Wodonga:"",
+         AraratTotal:"",
+        BallaratTotal:"",
+        BenallaTotal:"",
+        BendigoTotal:"",
+        ColacTotal:"",
+        GeelongTotal:"",
+        HorshamTotal:"",
+        LaraTotal:"",
+        MelbourneTotal:"",
+        MeltonTotal:"",
+        MilduraTotal:"",
+        WangarattaTotal:"",
+        WarrnamboolTotal:"",
+        WodongaTotal:"",
         AraratSleep:"",
         BallaratSleep:"",
         BenallaSleep:"",
@@ -86,22 +110,36 @@
       
      this.$axios({method:"GET", url:"http://localhost:3000/sleepDistribute"
     }).then(response => {this.info = response.data
-    
+        this.Ararat = this.info.Ararat.recent_time 
+        this.Ballarat = this.info.Ballarat.recent_time
+        this.Benalla = this.info.Benalla.recent_time  
+        this.Bendigo = this.info.Bendigo.recent_time  
+        this.Colac = this.info.Colac.recent_time    
+        this.Geelong = this.info.Geelong.recent_time  
+        this.Horsham = this.info.Horsham.recent_time   
+        this.Lara = this.info.Lara.recent_time  
+        this.Melbourne = this.info.Melbourne.recent_time 
+        this.Melton = this.info.Melton.recent_time 
+        this.Mildura = this.info.Mildura.recent_time 
+        this.Wangaratta = this.info.Wangaratta.recent_time
+        this.Warrnambool = this.info.Warrnambool.recent_time
+        this.Wodonga = this.info.Wodonga.recent_time
+
        
-        this.Ararat = this.info.Ararat.total_time 
-        this.Ballarat = this.info.Ballarat.total_time
-        this.Benalla = this.info.Benalla.total_time  
-        this.Bendigo = this.info.Bendigo.total_time  
-        this.Colac = this.info.Colac.total_time    
-        this.Geelong = this.info.Geelong.total_time  
-        this.Horsham = this.info.Horsham.total_time   
-        this.Lara = this.info.Lara.total_time  
-        this.Melbourne = this.info.Melbourne.total_time 
-        this.Melton = this.info.Melton.total_time 
-        this.Mildura = this.info.Mildura.total_time 
-        this.Wangaratta = this.info.Wangaratta.total_time
-        this.Warrnambool = this.info.Warrnambool.total_time
-        this.Wodonga = this.info.Wodonga.total_time
+        this.AraratTotal = this.info.Ararat.total_time 
+        this.BallaratTotal = this.info.Ballarat.total_time
+        this.BenallaTotal = this.info.Benalla.total_time  
+        this.BendigoTotal = this.info.Bendigo.total_time  
+        this.ColacTotal = this.info.Colac.total_time    
+        this.GeelongTotal = this.info.Geelong.total_time  
+        this.HorshamTotal = this.info.Horsham.total_time   
+        this.LaraTotal = this.info.Lara.total_time  
+        this.MelbourneTotal = this.info.Melbourne.total_time 
+        this.MeltonTotal = this.info.Melton.total_time 
+        this.MilduraTotal = this.info.Mildura.total_time 
+        this.WangarattaTotal = this.info.Wangaratta.total_time
+        this.WarrnamboolTotal = this.info.Warrnambool.total_time
+        this.WodongaTotal = this.info.Wodonga.total_time
         this.AraratSleep = this.info.Ararat.sleep
         this.BallaratSleep = this.info.Ballarat.sleep
         this.BenallaSleep = this.info.Benalla.sleep  

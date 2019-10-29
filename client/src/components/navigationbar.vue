@@ -22,7 +22,7 @@
 
       <v-toolbar-items>
         <router-link to ="/" tag="p"><v-btn text class = "title">Home</v-btn></router-link>
-        <router-link to ="/mapChart" tag="p"><v-btn text class = "title">AURIN Comparison</v-btn></router-link>
+        <router-link to ="/compareTotalTimeView" tag="p"><v-btn text class = "title">AURIN Comparison</v-btn></router-link>
         <router-link to ="/vicChart" tag="p"><v-btn text class = "title">Victoria Analysis</v-btn></router-link>
          <router-link to ="/testMap" tag="p"><v-btn text class = "title">General Analysis</v-btn></router-link>
       </v-toolbar-items>
